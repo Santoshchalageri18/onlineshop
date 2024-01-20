@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Doctor Registration</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<style>
+body {
+	background: linear-gradient(to right, #2c3e50, #3498db);
+	color: #ecf0f1;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.my-login-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+.card-wrapper {
+	width: 350px;
+}
+
+.card {
+	background-color: #34495e;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.brand {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.brand img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.card-title {
+	font-size: 24px;
+	color: #ecf0f1;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	color: #bdc3c7;
+}
+
+.form-control {
+	border: 1px solid #bdc3c7;
+	border-radius: 5px;
+	background-color: #2c3e50;
+	color: #ecf0f1;
+}
+
+.btn-secondary {
+	background-color: #3498db;
+	color: #ecf0f1;
+	border: 1px solid #3498db;
+}
+
+.btn-secondary:hover {
+	background-color: #2980b9;
+	color: #ecf0f1;
+	border: 1px solid #2980b9;
+}
+
+.btn-primary {
+	background-color: #2ecc71;
+	color: #ecf0f1;
+	border: 1px solid #2ecc71;
+}
+
+.btn-primary:hover {
+	background-color: #27ae60;
+	color: #ecf0f1;
+	border: 1px solid #27ae60;
+}
+
+.footer {
+	text-align: center;
+	padding: 10px;
+	background-color: #34495e;
+	color: #ecf0f1;
+}
+</style>
+</head>
+<body>
+	<header class="navbar navbar-dark bg-dark">
+		<div class="container">
+			<span class="navbar-brand mb-0 h1">HealthTunnel</span>
+		</div>
+	</header>
+
+	<div class="my-login-page">
+		<section>
+			<div class="container my-5">
+				<div class="row justify-content-md-center">
+					<div class="card-wrapper">
+						<div class="brand">
+							<!-- Replace with your logo or image -->
+							<img src="sign.jpg" alt="bootstrap 4 login page">
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Doctor Registration</h4>
+								<!-- <form action="@{/doctor/register}" method="POST"
+									class="my-login-validation" novalidate="" th:object="${doctor}"
+									onsubmit="submitForm(event)"> -->
+									
+										<form th:action="@{/doctor/register}" method="POST" class="my-login-validation" novalidate=""th:object="${doctor}"
+									onsubmit="submitForm(event)">
+
+									<!-- Existing code for form fields -->
+									<div class="form-group row">
+										<label for="email" class="col-sm-3 col-form-label">E-Mail
+											Address</label>
+										<div class="col-sm-9">
+											<input id="email" type="email" class="form-control"
+												name="email" required
+												pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+											<div class="invalid-feedback">Please provide a valid
+												email address.</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="password" class="col-sm-3 col-form-label">Password</label>
+										<div class="col-sm-9">
+											<input id="password" type="password" class="form-control"
+												name="password" required data-eye>
+											<div class="invalid-feedback">Password is required</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="name" class="col-sm-3 col-form-label">Name</label>
+										<div class="col-sm-9">
+											<input id="name" type="text" class="form-control" name="name"
+												required>
+											<div class="invalid-feedback">Your name is invalid</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="specialization" class="col-sm-3 col-form-label">Specialization</label>
+										<div class="col-sm-9">
+											<input id="specialization" type="text" class="form-control"
+												name="specialization" required>
+											<div class="invalid-feedback">Your specialization is
+												invalid</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="degree" class="col-sm-3 col-form-label">Degree</label>
+										<div class="col-sm-9">
+											<input id="degree" type="text" class="form-control"
+												name="degree" required>
+											<div class="invalid-feedback">Your degree is invalid</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="state" class="col-sm-3 col-form-label">State</label>
+										<div class="col-sm-9">
+											<input id="state" type="text" class="form-control"
+												name="state" required>
+											<div class="invalid-feedback">Your state is invalid</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="city" class="col-sm-3 col-form-label">City</label>
+										<div class="col-sm-9">
+											<input id="city" type="text" class="form-control" name="city"
+												required>
+											<div class="invalid-feedback">Your city is invalid</div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="status" class="col-sm-3 col-form-label">Status</label>
+										<div class="col-sm-9">
+											<input id="status" type="text" class="form-control"
+												name="status" value="Active" readonly>
+											<!-- You can set a default value or handle it dynamically based on user input -->
+											<div class="invalid-feedback">Invalid status</div>
+										</div>
+									</div>
+
+									<!-- New button to get user's location -->
+									<div class="form-group m-0">
+										<button type="button" class="btn btn-secondary btn-block"
+											onclick="getUserLocation()">Get My Location</button>
+									</div>
+
+									<!-- Hidden fields to store latitude and longitude -->
+									<div class="form-group row">
+										<label for="latitude" class="col-sm-3 col-form-label">Latitude</label>
+										<div class="col-sm-9">
+											<input id="latitude" type="text" class="form-control"
+												name="latitude" readonly>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="longitude" class="col-sm-3 col-form-label">Longitude</label>
+										<div class="col-sm-9">
+											<input id="longitude" type="text" class="form-control"
+												name="longitude" readonly>
+										</div>
+									</div>
+
+
+									<div class="form-group m-0">
+										<button type="submit" class="btn btn-primary btn-block">
+											Register</button>
+									</div>
+								</form>
+								<div class="mt-4 text-center">
+									Already have an account? <a th:href="@{/doclog}">Login</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<footer class="footer"> <p>&copy; 2024 . All rights reserved.</p></footer>
+	<script>
+		function submitForm(event) {
+			event.preventDefault();
+			document.forms[0].submit();
+		}
+
+		function getUserLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation
+						.getCurrentPosition(
+								function(position) {
+									document.getElementById('latitude').value = position.coords.latitude;
+									document.getElementById('longitude').value = position.coords.longitude;
+									alert('Latitude: '
+											+ position.coords.latitude
+											+ '\nLongitude: '
+											+ position.coords.longitude);
+								}, function(error) {
+									alert('Error getting location: '
+											+ error.message);
+								});
+			} else {
+				alert('Geolocation is not supported by your browser');
+			}
+		}
+	</script>
+</body>
+</html>

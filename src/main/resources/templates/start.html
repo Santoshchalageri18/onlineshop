@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HealthTunnel!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-size: 14px;
+            background-color: #f7f9fb;
+            color: #333; /* Default text color */
+        }
+
+        header {
+            background-color: teal; /* Header background color (Beautiful Blue) */
+            color: #fff; /* Header text color (White) */
+            padding: 5px;
+            text-align: left ;
+            position: absolute;
+            width: 100%;
+            z-index: 2; /* Ensure the header is on top */
+        }
+
+        .card-wrapper {
+            background-image: url('index.jpg');
+            background-size: cover;
+            background-position: center;
+            height: calc(100vh - 40px); /* Adjusted to account for the header and footer heights */
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand1 {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .brand1 img {
+            width: 100%;
+            height: 100vh; /* Make the image full screen */
+            object-fit: cover;
+        }
+
+        .card.fom {
+            border-color: transparent;
+            box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #27ae60; /* Button background color (Beautiful Green) */
+            border-color: #27ae60;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: teal; /* Footer background color (Dark Gray) */
+            color: #fff; /* Footer text color (White) */
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            width: 100%;
+            bottom: 2px;
+            z-index: 2; /* Ensure the footer is on top */
+        }
+    </style>
+</head>
+
+<body class="my-login-page">
+    <header>
+        <h2>HealthTunnel</h2>
+    </header>
+    <div class="card-wrapper">
+        
+        <div class="card fom">
+            <div class="card-body">
+            <h3>Welcome to Our Health Management System</h3>
+                <h4 class="card-title">Please choose an option:</h4>
+            </div>
+            <div>
+                <a th:href="@{/patlog}" class="btn btn-primary">Patient</a>
+                <a th:href="@{/doclog}" class="btn btn-primary">Doctor</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+         <p>&copy; 2024 . All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

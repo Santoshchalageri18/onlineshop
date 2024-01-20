@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+  <!--   <link rel="stylesheet" href="home.css"> -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .navbar-brand img {
+            margin-right: 2px;
+        }
+
+        .nav-link {
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #FF6F61;
+        }
+
+        .full-screen-image {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: url('dochome.jpg') center center/cover no-repeat fixed;
+        }
+
+        .full-screen-content {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: yellow;
+            z-index: 1;
+            width: 100%;
+            padding: 500px;
+        }
+
+        .post-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .post-thumb img {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-thumb img:hover {
+            transform: scale(1.05);
+        }
+
+        .post-content {
+            max-width: 100px;
+            margin-top: 30px;
+        }
+
+        .post-title {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .post-para {
+            color: yellow;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            padding: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand text-capitalize" href="#"> <img
+                src="sign.jpg" width="40" height="40" alt="" loading="lazy"
+                class="mr-2"> Doctor Dashboard
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active"><a class="nav-link" href="#home">
+                            <i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span
+                            class="sr-only">(current)</span>
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link"
+                        th:href="@{/patientlist}"><i class="fa fa-user mr-1"
+                            aria-hidden="true"></i>Appointments</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                        th:href="@{/appointment-history}"> <i
+                            class="fa fa-history mr-1" aria-hidden="true"></i>Appointment
+                            History
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}"><i
+                            class="fa fa-medkit mr-1" aria-hidden="true"></i>Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="full-screen-image">
+           <!--  <div class="full-screen-content">
+                <h4 th:text="'Welcome Dr. ' + ${email}"></h4>
+                <p style="color:red;">Manage your appointments and provide
+                    excellent healthcare to your patients.</p>
+            </div> -->
+            <div class="full-screen-content">
+            <h4 class="post-title" th:text="'Welcome Dr. ' + ${email}"></h4>
+            <p class="post-para">Manage your appointments and provide
+                excellent healthcare to your patients.</p>
+
+            <form id="statusForm" th:action="@{/updateDoctorStatus}"
+                method="post">
+                <input type="hidden" name="email" th:value="${email}"> <label
+                    for="status">Select Status:</label> 
+                    <select id="status"  name="status" style="width: 200px;">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Update
+                    Status</button>
+            </form>
+        </div>
+        </div>
+    </header>
+
+   
+    
+
+    <footer>
+        <p>&copy; 2024 . All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and other dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-2EEundEuOQfGqpc3DnlQQlpUd6+8+F5NQTa4Vs4xwb4O6DqjiOo9gJ0z1sfjljn"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyCk8Ht1QT5OPqjU8FQq9R+8L4FojK9q"
+        crossorigin="anonymous"></script>
+</body>
+</html>
